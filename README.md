@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## The backend of this application
+
+The employee_backend_laravel.zip is added as a zip file to this repository. It contains the server side codes. When running the Angular application make sure to remove that zip file first before running it.
+
+To run the backend, unzip employee_backend_laravel.zip, delete the vendor folder, and run `composer install`. Then run `php artisan serve` in your terminal.
