@@ -30,4 +30,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 The employee_backend_laravel.zip is added as a zip file to this repository. It contains the server side codes. When running the Angular application make sure to remove that zip file first before running it.
 
-To run the backend, unzip employee_backend_laravel.zip, delete the vendor folder, and run `composer install`. Then run `php artisan serve` in your terminal.
+To run the backend, unzip employee_backend_laravel.zip, delete the vendor folder, and run `composer install` in your terminal. Then run `php artisan serve` in your terminal.
