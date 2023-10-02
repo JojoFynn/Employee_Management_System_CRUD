@@ -1,0 +1,153 @@
+<section class = "web-section">
+      <div class="top-nav">
+ <img class = "breadcrumb_icon" (click)="breadcrumb()" src="../../assets/Vector.svg" alt="">
+      </div>
+   
+    <div class = "upper-top">
+      <h2>Employee List</h2>
+      <button type="submit" class="save-changes1" (click)="open(content)">
+        <img src="../../assets/Add_icon.svg" alt="">
+        <span class="button-content">Add employee</span>
+      </button>
+    </div>
+    <hr class="custom-hr">
+    <table>
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="loadedEmployees.length >= 1">
+          <tr *ngFor="let staff of loadedEmployees">
+            <td>{{staff.name}}</td>
+            <td>{{staff.email}}</td>
+            <td>GHS {{staff.salary | number:'1.0-2' }}</td>
+            <td><img class = "edit_icon" src="../../assets/pen 1.svg" alt="" (click) = "open(content3);employeeId = staff.id; employeeEmail = staff.email; employeeName = staff.name; employeeSalary = staff.salary"></td>
+            <td><img class = "delete_icon" src="../../assets/Frame.svg" alt="" (click) = "open(content2); employeeId = staff.id; employeeName = staff.name; " ></td>
+          </tr> 
+        </tbody>
+    </table>
+</section>
+<!-- Modal to Delete Employee-->
+<ng-template let-modal let-c="close" let-d="dismiss" #content2>
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" style = "font-family: 'Montserrat', sans-serif;font-weight: 700;">Delete Employee</h1>
+    <button type="button" class="btn-close"  (click) = "c('Close Modal')"></button>
+  </div>
+  <div class="modal-body">
+    <div class = "delete-form">
+   <p>Are you sure you want to delete <span style="font-weight: bold; color: red;">{{employeeName}}</span> from the system. This action cannot be undone.</p>
+   <div class="position">
+   <button class = "delete_user" (click) = "onDeleteEmployee()">
+    <img src="../../assets/trash_icon.svg" alt="">
+    <span>Delete Employee</span>
+   </button>
+  </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Modal to Add Employee-->
+<ng-template #content let-modal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" style = "font-family: 'Montserrat', sans-serif !important;font-weight: 700;">Add an Employee</h1>
+    <button type="button" class="btn-close"  (click) = "c('Close Modal')"></button>
+  </div>
+  <div class="modal-body">
+    <form class="user-form" #postForm="ngForm" (ngSubmit)="onCreateEmployee(postForm.value)">
+      <div class="form-section">
+        <label for="name">Name<span class="span">*</span></label>
+        <input type="text" 
+            id = "name" 
+            placeholder="Enter name here"
+            required
+            ngModel
+            name = "name"
+            #name = "ngModel">
+      </div>
+      <div class="form-section">
+        <label for="email">Email<span class="span">*</span></label>
+        <input 
+            type="email" 
+            id = "email"
+            required
+            ngModel
+            name = "email" 
+            placeholder="Enter email here"
+            #email = "ngModel">
+      </div>
+      <div class="form-section">
+        <label for="salary">Salary<span class="span">*</span></label>
+        <input 
+        type="number" 
+        id = "salary"
+        name = "salary" 
+        required
+        ngModel 
+        placeholder="Enter salary here"
+        #salary = "ngModel">
+      </div>
+      <div class="bottom">
+    <button type="submit" class="save-changes1">
+      <img src="../../assets/Add_icon.svg" alt="">
+      <span class="button-content">Add </span>
+    </button>
+    <button type="button" class="save-changes2" (click)="resetUserForm(postForm);">
+      <img src="../../assets/erase_icon.svg" alt="">
+      <span class="button-content">Clear form</span>
+    </button>
+  </div>
+  </form>
+  </div>
+</ng-template>
+
+<!-- Modal to Update Employee -->
+<ng-template let-modal let-c="close" let-d="dismiss"  #content3>
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" style = "font-family: 'Montserrat', sans-serif !important;font-weight: 700;">Update Employee</h1>
+    <button type="button" class="btn-close"  (click) = "c('Close Modal')"></button>
+  </div>
+  <div class="modal-body">
+    <form class="user-form" #postForm1="ngForm" (ngSubmit)="onEditEmployee(postForm1.value);">
+      <div class="form-section">
+        <label for="name">Name</label>
+        <input 
+            type="text"
+            class="form-control"  
+            name = "name"
+            [(ngModel)] = "employeeName"
+          />      
+      </div>
+      <div class="form-section">
+        <label for="email">Email</label>
+        <input
+        type="email"
+        name = "email"
+        class="form-control"
+        [(ngModel)] = "employeeEmail"
+      />
+      </div>
+      <div class="form-section">
+        <label for="salary">Salary</label>
+        <input 
+        type="number"
+        name = "salary" 
+        class="form-control"
+        [(ngModel)] = "employeeSalary">
+      </div>
+      <div class="bottom">
+    <button type="submit" class="save-changes1">
+      <img src="../../assets/edit_icon.svg" alt="">
+      <span class="button-content">Update </span>
+    </button>
+    <button type="button" class="save-changes2" (click)="resetUserForm(postForm1);" >
+      <img src="../../assets/erase_icon.svg" alt="">
+      <span class="button-content">Clear form</span>
+    </button>
+  </div>
+  </form>
+  </div>
+</ng-template>
+
